@@ -5,19 +5,21 @@ name: Repo Sync Stalls
 # **Who does it impact**: Open-source contributors, docs engineering.
 
 on:
-  workflow_dispatch:
+  workflow_dispatch: null
   schedule:
-    - cron: '32 */2 * * *' # At minute 32 past every 2nd hour.
+    - cron: "32 */2 * * *" # At minute 32 past every 2nd hour.
 
 jobs:
   repo-sync-stalls:
     runs-on: ubuntu-latest
     steps:
-      - if: github.repository == 'github/docs-internal' || github.repository == 'github/docs'
+      - if: github.repository == 'github/docs-internal' || github.repository ==
+          'github/docs'
         name: Check if repo sync is stalled
         uses: actions/github-script@626af12fe9a53dc2972b48385e7fe7dec79145c9
         with:
-          github-token: ${{ secrets.DOCUBOT_FR_PROJECT_BOARD_WORKFLOWS_REPO_ORG_READ_SCOPES }}
+          github-token: ${{
+            secrets.DOCUBOT_FR_PROJECT_BOARD_WORKFLOWS_REPO_ORG_READ_SCOPES }}
           script: |
             let pulls;
             const owner = context.repo.owner
@@ -56,4 +58,5 @@ jobs:
           channel: ${{ secrets.DOCS_ALERTS_SLACK_CHANNEL_ID }}
           bot-token: ${{ secrets.SLACK_DOCS_BOT_TOKEN }}
           color: failure
-          text: Repo sync appears to be stalled for ${{github.repository}}. See https://github.com/${{github.repository}}/pulls?q=is%3Apr+is%3Aopen+label%3Aautomated-reposync-pr
+          text: Repo sync appears to be stalled for ${{github.repository}}. See
+            https://github.com/${{github.repository}}/pulls?q=is%3Apr+is%3Aopen+label%3Aautomated-reposync-pr
