@@ -8,15 +8,15 @@ on:
   push:
     branches:
       - main
-  pull_request:
-
+  pull_request: null
 env:
   CI: true
 
 jobs:
   build:
     # Do not run this job for translations PRs
-    if: ${{ github.head_ref != 'translations' && github.ref != 'refs/heads/translations' }}
+    if: ${{ github.head_ref != 'translations' && github.ref !=
+      'refs/heads/translations' }}
 
     runs-on: ubuntu-latest
     steps:
