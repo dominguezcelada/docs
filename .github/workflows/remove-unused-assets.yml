@@ -6,7 +6,7 @@ name: Remove unused assets
 
 on:
   schedule:
-    - cron: '20 15 * * 0' # run every Sunday at 20:15 UTC / 12:15 PST
+    - cron: "20 15 * * 0" # run every Sunday at 20:15 UTC / 12:15 PST
 
 env:
   FREEZE: ${{ secrets.FREEZE }}
@@ -44,9 +44,15 @@ jobs:
           commit-message: Action ran script/remove-unused-assets.js
           title: Remove unused assets
           body:
-            "Hello! This PR removes some files that exist in the repo but are not used in content or data files:\n\n
-            ${{ steps.results.outputs.content }}
-            \n\nIf you have any questions, please contact @github/docs-engineering."
+            "Hello! This PR removes some files that exist in the repo but are not used
+            in content or data files:
+
+
+            \ ${{ steps.results.outputs.content }}\
+
+
+            If you have any questions, please contact
+            @github/docs-engineering."
           labels: unused assets
           project: Core docs work for the current week
           project-column: Should do
