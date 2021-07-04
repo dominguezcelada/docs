@@ -5,12 +5,13 @@ name: Pa11y
 # **Who does it impact**: Docs engineering, users who need accessibility features.
 
 on:
-  workflow_dispatch:
+  workflow_dispatch: null
   schedule:
-    - cron: '25 17 * * *' # once a day at 17:25 UTC / 11:50 PST
+    - cron: "25 17 * * *" # once a day at 17:25 UTC / 11:50 PST
 jobs:
   test:
-    if: github.repository == 'github/docs-internal' || github.repository == 'github/docs'
+    if: github.repository == 'github/docs-internal' || github.repository ==
+      'github/docs'
     runs-on: ubuntu-latest
     steps:
       - name: Check out repo
