@@ -11,7 +11,8 @@ on:
 
 jobs:
   move_issues:
-    if: github.repository == 'github/docs' && (github.event.label.name == 'help wanted' || github.event.label.name == 'good first issue')
+    if: github.repository == 'github/docs' && (github.event.label.name == 'help
+      wanted' || github.event.label.name == 'good first issue')
     runs-on: ubuntu-latest
 
     steps:
@@ -19,4 +20,6 @@ jobs:
         with:
           project: Docs team reviews
           column: Help wanted
-          repo-token: ${{ secrets.DOCUBOT_FR_PROJECT_BOARD_WORKFLOWS_REPO_ORG_READ_SCOPES }}
+          repo-token:
+            ${{ secrets.DOCUBOT_FR_PROJECT_BOARD_WORKFLOWS_REPO_ORG_READ_SCOPES
+            }}
