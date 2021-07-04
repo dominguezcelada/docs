@@ -5,12 +5,11 @@ name: OpenAPI dev mode check
 # **Who does it impact**:
 
 on:
-  workflow_dispatch:
+  workflow_dispatch: null
   push:
     branches:
       - main
-  pull_request:
-
+  pull_request: null
 jobs:
   check-schema-versions:
     if: ${{ github.repository == 'github/docs-internal' }}
