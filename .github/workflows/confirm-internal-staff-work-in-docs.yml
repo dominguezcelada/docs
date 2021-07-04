@@ -22,7 +22,8 @@ jobs:
       - id: membership_check
         uses: actions/github-script@626af12fe9a53dc2972b48385e7fe7dec79145c9
         with:
-          github-token: ${{ secrets.DOCUBOT_FR_PROJECT_BOARD_WORKFLOWS_REPO_ORG_READ_SCOPES }}
+          github-token: ${{
+            secrets.DOCUBOT_FR_PROJECT_BOARD_WORKFLOWS_REPO_ORG_READ_SCOPES }}
           script: |
             // Only perform this action with GitHub employees
             try {
@@ -67,10 +68,18 @@ jobs:
 
             core.setOutput('did_warn', 'true')
 
-      - name: Send Slack notification if a GitHub employee who isn't on the docs team opens an issue in public
-        if: ${{ steps.membership_check.outputs.did_warn && github.repository == 'github/docs' }}
+      - name:
+          Send Slack notification if a GitHub employee who isn't on the docs team
+          opens an issue in public
+        if: ${{ steps.membership_check.outputs.did_warn && github.repository ==
+          'github/docs' }}
         uses: someimportantcompany/github-actions-slack-message@0b470c14b39da4260ed9e3f9a4f1298a74ccdefd
         with:
           channel: ${{ secrets.DOCS_OPEN_SOURCE_SLACK_CHANNEL_ID }}
           bot-token: ${{ secrets.SLACK_DOCS_BOT_TOKEN }}
-          text: <@${{github.actor}}> opened https://github.com/github/docs/issues/${{ github.event.number || github.event.issue.number }} publicly on the github/docs repo instead of the private github/docs-internal repo. They have been notified via a new issue in the github/docs-internal repo to confirm this was intentional.
+          text:
+            <@${{github.actor}}> opened https://github.com/github/docs/issues/${{
+            github.event.number || github.event.issue.number }} publicly on the
+            github/docs repo instead of the private github/docs-internal repo.
+            They have been notified via a new issue in the github/docs-internal
+            repo to confirm this was intentional.
