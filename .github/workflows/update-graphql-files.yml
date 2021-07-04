@@ -5,9 +5,9 @@ name: Update GraphQL files
 # **Who does it impact**: Docs engineering, people reading GraphQL docs.
 
 on:
-  workflow_dispatch:
+  workflow_dispatch: null
   schedule:
-    - cron: '20 16 * * *' # run every day at 16:20 UTC / 8:20 PST
+    - cron: "20 16 * * *" # run every day at 16:20 UTC / 8:20 PST
 
 # **IMPORTANT:** Do not change the FREEZE environment variable set here!
 # This workflow runs on a recurring basis. To temporarily disable it (e.g.,
@@ -32,7 +32,7 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@fdcfbcf14ec9672f6f615cb9589a1bc5dd69d262
         with:
-          ruby-version: '2.4'
+          ruby-version: "2.4"
       - name: Install Ruby dependencies
         run: |
           gem install bundler
@@ -55,9 +55,15 @@ jobs:
           title: GraphQL schema update
           body:
             "Hello! Some GraphQL data in github/github was updated recently. This PR
-            syncs up the GraphQL data in this repo.\n\n
-            If CI passes, this PR will be auto-merged. :green_heart:\n\n
-            If CI does not pass or other problems arise, contact #docs-engineering on slack."
+            syncs up the GraphQL data in this repo.
+
+
+            \ If CI passes, this PR will be auto-merged.
+            :green_heart:
+
+
+            \ If CI does not pass or other problems arise, contact
+            #docs-engineering on slack."
           labels: automerge,autoupdate
           branch: graphql-schema-update
       - if: ${{ failure() && env.FREEZE != 'true'}}
@@ -79,4 +85,6 @@ jobs:
           channel: ${{ secrets.DOCS_ALERTS_SLACK_CHANNEL_ID }}
           bot-token: ${{ secrets.SLACK_DOCS_BOT_TOKEN }}
           color: failure
-          text: The last update-graphql-files run for ${{github.repository}} failed. See https://github.com/${{github.repository}}/actions/workflows/update-graphql-files.yml
+          text:
+            The last update-graphql-files run for ${{github.repository}} failed. See
+            https://github.com/${{github.repository}}/actions/workflows/update-graphql-files.yml
