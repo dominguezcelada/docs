@@ -16,9 +16,9 @@ name: Repo Sync
 # **Who does it impact**: Open-source.
 
 on:
-  workflow_dispatch:
+  workflow_dispatch: null
   schedule:
-    - cron: '10,25,40,55 * * * *' # every 15 minutes
+    - cron: "10,25,40,55 * * * *" # every 15 minutes
 
 jobs:
   close-invalid-repo-sync:
@@ -36,7 +36,8 @@ jobs:
           state: open
 
       - name: Close pull request if unwanted
-        if: ${{ github.repository == 'github/docs' && steps.find-pull-request.outputs.number }}
+        if: ${{ github.repository == 'github/docs' &&
+          steps.find-pull-request.outputs.number }}
         uses: actions/github-script@626af12fe9a53dc2972b48385e7fe7dec79145c9
         with:
           github-token: ${{ secrets.DOCS_BOT_SPAM_VISION }}
@@ -89,7 +90,8 @@ jobs:
 
   repo-sync:
     needs: close-invalid-repo-sync
-    if: github.repository == 'github/docs-internal' || github.repository == 'github/docs'
+    if: github.repository == 'github/docs-internal' || github.repository ==
+      'github/docs'
     name: Repo Sync
     runs-on: ubuntu-latest
     steps:
@@ -114,8 +116,15 @@ jobs:
         with:
           source_branch: repo-sync
           destination_branch: main
-          pr_title: 'repo sync'
-          pr_body: "This is an automated pull request to sync changes between the public and private repos.\n\n:robot: This pull request should be merged (not squashed) to preserve continuity across repos, so please let a bot do the merging!"
+          pr_title: "repo sync"
+          pr_body:
+            "This is an automated pull request to sync changes between the public
+            and private repos.
+
+
+            :robot: This pull request should be merged (not
+            squashed) to preserve continuity across repos, so please let a bot
+            do the merging!"
           pr_label: autoupdate,automated-reposync-pr
           github_token: ${{ secrets.OCTOMERGER_PAT_WITH_REPO_AND_WORKFLOW_SCOPE }}
 
@@ -207,4 +216,5 @@ jobs:
           channel: ${{ secrets.DOCS_ALERTS_SLACK_CHANNEL_ID }}
           bot-token: ${{ secrets.SLACK_DOCS_BOT_TOKEN }}
           color: failure
-          text: The last repo-sync run for ${{github.repository}} failed. See https://github.com/${{github.repository}}/actions?query=workflow%3A%22Repo+Sync%22
+          text: The last repo-sync run for ${{github.repository}} failed. See
+            https://github.com/${{github.repository}}/actions?query=workflow%3A%22Repo+Sync%22
