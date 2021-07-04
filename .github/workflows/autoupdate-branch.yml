@@ -24,7 +24,8 @@ on:
 
 jobs:
   autoupdate:
-    if: github.repository == 'github/docs-internal' || github.repository == 'github/docs'
+    if: github.repository == 'github/docs-internal' || github.repository ==
+      'github/docs'
     name: autoupdate
     runs-on: ubuntu-latest
     steps:
