@@ -13,7 +13,8 @@ jobs:
   transfer-issue:
     name: Transfer issue
     runs-on: ubuntu-latest
-    if: github.event.label.name == 'rest-schema' && github.repository == 'github/docs'
+    if: github.event.label.name == 'rest-schema' && github.repository ==
+      'github/docs'
     steps:
       - name: Check if this run was triggered by a member of the docs team
         uses: actions/github-script@626af12fe9a53dc2972b48385e7fe7dec79145c9
@@ -41,7 +42,11 @@ jobs:
           exit 1
 
       - name: Comment on the old issue
-        run: gh issue comment $OLD_ISSUE --body "Thank you for opening this issue! Changes to the REST API schema can be requested in [github/rest-api-description](https://github.com/github/rest-api-description). I will transfer your issue over to that open source repo."
+        run:
+          gh issue comment $OLD_ISSUE --body "Thank you for opening this issue!
+          Changes to the REST API schema can be requested in
+          [github/rest-api-description](https://github.com/github/rest-api-description).
+          I will transfer your issue over to that open source repo."
         env:
           GITHUB_TOKEN: ${{secrets.DOCUBOT_FR_PROJECT_BOARD_WORKFLOWS_REPO_ORG_READ_SCOPES}}
           OLD_ISSUE: ${{ github.event.issue.html_url }}
