@@ -5,9 +5,9 @@ name: Check all English links
 # **Who does it impact**: Docs content.
 
 on:
-  workflow_dispatch:
+  workflow_dispatch: null
   schedule:
-    - cron: '40 19 * * *' # once a day at 19:40 UTC / 11:40 PST
+    - cron: "40 19 * * *" # once a day at 19:40 UTC / 11:40 PST
 
 jobs:
   check_all_english_links:
