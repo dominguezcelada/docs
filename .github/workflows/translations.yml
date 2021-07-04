@@ -6,7 +6,7 @@ name: Translations
 
 on:
   schedule:
-    - cron: '20 19 * * *' # once a day at 19:20 UTC / 11:20 PST
+    - cron: "20 19 * * *" # once a day at 19:20 UTC / 11:20 PST
 
 env:
   FREEZE: ${{ secrets.FREEZE }}
