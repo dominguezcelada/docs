@@ -11,7 +11,8 @@ on:
 
 jobs:
   triage:
-    if: github.repository == 'github/docs-internal' && github.event.pull_request.head.ref == 'translations'
+    if: github.repository == 'github/docs-internal' &&
+      github.event.pull_request.head.ref == 'translations'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/github-script@626af12fe9a53dc2972b48385e7fe7dec79145c9
