@@ -5,8 +5,7 @@ name: Auto label Pull Requests
 # **Who does it impact**: Automation that relies on the engineering label.
 
 on:
-  pull_request:
-
+  pull_request: null
 jobs:
   triage:
     if: github.repository == 'github/docs-internal'
@@ -15,4 +14,4 @@ jobs:
       # See labeling configuration in the `.github/labeler.yml` file
       - uses: actions/labeler@5f867a63be70efff62b767459b009290364495eb
         with:
-          repo-token: '${{ secrets.GITHUB_TOKEN }}'
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
