@@ -6,7 +6,7 @@ name: Open Enterprise release or deprecation issue
 
 on:
   schedule:
-    - cron: '49 14 * * *' # At 14:49 UTC daily
+    - cron: "49 14 * * *" # At 14:49 UTC daily
 
 jobs:
   open_enterprise_issue:
@@ -22,18 +22,22 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f
-        if: steps.existingIssue.outputs.deprecationIssue == 'false' ||  steps.existingIssue.outputs.releaseIssue == 'false'
+        if: steps.existingIssue.outputs.deprecationIssue == 'false'
+          ||  steps.existingIssue.outputs.releaseIssue == 'false'
 
       - name: npm ci
-        if: steps.existingIssue.outputs.deprecationIssue == 'false' || steps.existingIssue.outputs.releaseIssue == 'false'
+        if: steps.existingIssue.outputs.deprecationIssue == 'false' ||
+          steps.existingIssue.outputs.releaseIssue == 'false'
         run: npm ci
 
       - name: npm run build
-        if: steps.existingIssue.outputs.deprecationIssue == 'false' ||  steps.existingIssue.outputs.releaseIssue == 'false'
+        if: steps.existingIssue.outputs.deprecationIssue == 'false'
+          ||  steps.existingIssue.outputs.releaseIssue == 'false'
         run: npm run build
 
       - name: Update enterprise dates
-        if: steps.existingIssue.outputs.deprecationIssue == 'false' ||  steps.existingIssue.outputs.releaseIssue == 'false'
+        if: steps.existingIssue.outputs.deprecationIssue == 'false'
+          ||  steps.existingIssue.outputs.releaseIssue == 'false'
         run: |
           script/update-enterprise-dates.js
 
@@ -42,7 +46,8 @@ jobs:
         run: |
           .github/actions-scripts/create-enterprise-issue.js release
         env:
-          GITHUB_TOKEN: ${{ secrets.DOCUBOT_FR_PROJECT_BOARD_WORKFLOWS_REPO_ORG_READ_SCOPES }}
+          GITHUB_TOKEN: ${{
+            secrets.DOCUBOT_FR_PROJECT_BOARD_WORKFLOWS_REPO_ORG_READ_SCOPES }}
       - name: Create an enterprise deprecation issue
         if: steps.existingIssue.outputs.deprecationIssue == 'false'
         run: |
