@@ -13,12 +13,10 @@ on:
     types:
       - closed
     paths:
-      - 'content/github/site-policy/**'
+      - "content/github/site-policy/**"
 
   # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+  workflow_dispatch: null # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
   copy-file:
@@ -41,11 +39,11 @@ jobs:
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_SITEPOLICY }}
         with:
-          source_folder: 'content/github/site-policy'
-          destination_repo: 'github/site-policy'
-          destination_branch: 'main'
-          destination_branch_create: 'repo-sync'
-          destination_folder: 'Policies'
-          user_email: 'site-policy-bot@users.noreply.github.com'
-          user_name: 'site-policy-bot'
-          commit_msg: '${{ env.MESSAGE }}'
+          source_folder: "content/github/site-policy"
+          destination_repo: "github/site-policy"
+          destination_branch: "main"
+          destination_branch_create: "repo-sync"
+          destination_folder: "Policies"
+          user_email: "site-policy-bot@users.noreply.github.com"
+          user_name: "site-policy-bot"
+          commit_msg: "${{ env.MESSAGE }}"
