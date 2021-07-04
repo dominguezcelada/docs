@@ -5,9 +5,9 @@ name: Add docs-reviewers request to FR board
 # **Who does it impact**: docs-content maintainers
 
 on:
-  workflow_dispatch:
+  workflow_dispatch: null
   schedule:
-    - cron: '25 4 * * *'
+    - cron: "25 4 * * *"
 
 jobs:
   add-requests-to-board:
@@ -21,7 +21,7 @@ jobs:
       - name: Set up Python 3.9
         uses: actions/setup-python@dc73133d4da04e56a135ae2246682783cc7c7cb6
         with:
-          python-version: '3.9'
+          python-version: "3.9"
 
       - name: Install dependencies
         run: |
