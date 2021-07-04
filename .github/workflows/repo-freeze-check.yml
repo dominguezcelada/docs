@@ -5,7 +5,7 @@ name: Repo Freeze Check
 # **Who does it impact**: Anyone working on docs.
 
 on:
-  workflow_dispatch:
+  workflow_dispatch: null
   pull_request_target:
     types:
       - opened
@@ -21,7 +21,8 @@ env:
 
 jobs:
   check-freezer:
-    if: ${{ github.repository == 'github/docs-internal' || github.repository == 'github/docs' }}
+    if: ${{ github.repository == 'github/docs-internal' || github.repository ==
+      'github/docs' }}
     name: Prevent merging during deployment freezes
     runs-on: ubuntu-latest
     steps:
