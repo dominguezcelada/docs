@@ -5,9 +5,9 @@ name: Crowdin Sync
 # **Who does it impact**: Docs localization.
 
 on:
-  workflow_dispatch:
+  workflow_dispatch: null
   schedule:
-    - cron: '33 2 * * *' # every day at 2:33 UTC at least until automerge is working
+    - cron: "33 2 * * *" # every day at 2:33 UTC at least until automerge is working
 
 jobs:
   sync_with_crowdin:
@@ -27,7 +27,7 @@ jobs:
 
           # Using a custom config temporarily to avoid clobbering the existing crowdin.yml
           # that is used by the github-help-docs OAuth integration.
-          config: 'crowdin.yml'
+          config: "crowdin.yml"
 
           # This is the name of the git branch that Crowdin will create when opening a pull request.
           # This branch does NOT need to be manually created. It will be created automatically by the action.
