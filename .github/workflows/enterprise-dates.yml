@@ -7,9 +7,9 @@ name: Enterprise date updater
 # **Who does it impact**: Docs engineering, docs content.
 
 on:
-  workflow_dispatch:
+  workflow_dispatch: null
   schedule:
-    - cron: '39 2 * * 2' # At 02:39 on Tuesday
+    - cron: "39 2 * * 2" # At 02:39 on Tuesday
 
 # **IMPORTANT:** Do not change the FREEZE environment variable set here!
 # This workflow runs on a recurring basis. To temporarily disable it (e.g.,
@@ -49,12 +49,21 @@ jobs:
         with:
           # need to use a token with repo and workflow scopes for this step
           token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: '🤖 ran script/update-enterprise-dates.js'
+          commit-message: "🤖 ran script/update-enterprise-dates.js"
           title: 🤖 lib/enterprise-dates.json update
-          body:
-            "Hello! The GitHub Enterprise Server release dates have changed.\n\n
-            If CI passes, this PR will be auto-merged. :green_heart:\n\n
-            If CI does not pass or other problems arise, contact #docs-engineering on slack.\n\nThis PR was 🤖-crafted by `.github/workflows/enterprise-dates.yml`. 🧶"
+          body: "Hello! The GitHub Enterprise Server release dates have changed.
+
+
+            \ If CI passes, this PR will be auto-merged.
+            :green_heart:
+
+
+            \ If CI does not pass or other problems arise, contact
+            #docs-engineering on slack.
+
+
+            This PR was 🤖-crafted by
+            `.github/workflows/enterprise-dates.yml`. 🧶"
           labels: automerge,autoupdate
           branch: enterprise-server-dates-update
           delete-branch: true
@@ -80,4 +89,6 @@ jobs:
           channel: ${{ secrets.DOCS_ALERTS_SLACK_CHANNEL_ID }}
           bot-token: ${{ secrets.SLACK_DOCS_BOT_TOKEN }}
           color: failure
-          text: The last enterprise-dates run for ${{github.repository}} failed. See https://github.com/${{github.repository}}/actions/workflows/enterprise-dates.yml
+          text:
+            The last enterprise-dates run for ${{github.repository}} failed. See
+            https://github.com/${{github.repository}}/actions/workflows/enterprise-dates.yml
